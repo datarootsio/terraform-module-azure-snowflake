@@ -17,6 +17,7 @@ variable "container_name" {
 variable "snowflake_alias" {
   description = "Alias of the terraform provider"
   type        = string
+  default     = "terraform"
 }
 
 variable "snowflake_role" {
