@@ -1,7 +1,7 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = var.resource_group_name
-    storage_account_name = var.storage_account_name
-    container_name       = var.container_name
+    resource_group_name  = "rootsac2022q1edge"
+    storage_account_name = "rootsac2022storage"
+    container_name       = "tfstate"
   }
 }
