@@ -4,6 +4,6 @@ provider "azurerm" {
 
 provider "snowflake" {
   features {}
-  alias = var.snowflake_alias
-  role  = var.snowflake_role
+  alias = "terraform"
+  role  = "ACCOUNTADMIN"
 }
