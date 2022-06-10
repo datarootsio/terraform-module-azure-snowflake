@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "weather-on-edge"
+version = "0.1.0"
+description = "\"Poetry environment for weather on edge project\""
+authors = ["RootsAcademy - ML Team"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+torch = "^1.11.0"
+azure-iot-device = "^2.11.0"
+azure-iot-hub = "^2.6.0"
+python-dotenv = "^0.20.0"
+pre-commit = "^2.18.1"
+black = "^22.3.0"
+pytest = "^7.1.2"
+isort = "^5.10.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

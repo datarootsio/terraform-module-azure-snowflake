@@ -1,0 +1,42 @@
+name: "Deploy prod"
+on:
+  push:
+    tags:
+      - v*
+env:
+  tf_version: 'latest'
+jobs:
+  apply-prod:
+    # Allowing prod deployments in tags not in main will
+    # allow deployments that haven't been tested in staging yet
+    if: github.event.base_ref=='refs/heads/main'
+    name: Terraform Apply Prod
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tf
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config backend/prod.tfvars
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -var-file vars/prod.tfvars -auto-approve
+        env:
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_REGION: ${{ secrets.SNOWFLAKE_REGION}}
+          TF_VAR_sas_token_sensors_sandbox: ${{ secrets.SAS_TOKEN_SENSORS_SANDBOX }}
+          TF_VAR_sas_token_predictions_sandbox: ${{ secrets.SAS_TOKEN_PREDICTIONS_SANDBOX }}
