@@ -17,3 +17,8 @@ variable "resource_group_prefix" {
   type    = string
   default = "rootsac2022q1edge"
 }
+
+variable "event_subscription_name" {
+  type    = string
+  default = "snowpipe-event-sub"
+} 
