@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = "Name of the resource group containg the state"
   type        = string
-  default     = "rootsac2022q1edge"
+  default     = "rg-terraformingsnowflake"
 }
 
 variable "storage_account_name" {
