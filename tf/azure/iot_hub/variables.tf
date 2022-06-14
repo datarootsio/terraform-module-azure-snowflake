@@ -1,3 +1,8 @@
+variable "env" {
+  description = "Environment for resources"
+  type        = string
+}
+
 variable "eg_st_topic_type" {
   type    = string
   default = "Microsoft.Storage.StorageAccounts"
