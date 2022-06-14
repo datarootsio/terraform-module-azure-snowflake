@@ -7,9 +7,6 @@ locals {
   qualified_predictions_table_name = "${snowflake_table.predictions.database}.${snowflake_table.predictions.schema}.${snowflake_table.predictions.name}"
   qualified_stage_predictions_name = "${snowflake_stage.snowstage_predictions.database}.${snowflake_stage.snowstage_predictions.schema}.${snowflake_stage.snowstage_predictions.name}"
 
-  qualified_stage_name_sandbox             = "${snowflake_stage.snowstage_sandbox.database}.${snowflake_stage.snowstage_sandbox.schema}.${snowflake_stage.snowstage_sandbox.name}"
-  qualified_stage_predictions_name_sandbox = "${snowflake_stage.snowstage_predictions.database}.${snowflake_stage.snowstage_predictions.schema}.${snowflake_stage.snowstage_predictions.name}"
-
   file_format_name              = "${file_format_prefix}_${env_upper}"
   storage_integration_name      = "${storage_integration_prefix}_${env_upper}"
   notification_integration_name = "${notification_integration_prefix}_${env_upper}"

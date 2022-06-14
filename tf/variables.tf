@@ -36,3 +36,11 @@ variable "snowflake_role" {
   type        = string
   default     = "ACCOUNTADMIN"
 }
+
+variable "sas_token" {
+  type = string
+}
+
+variable "sas_token_predictions" {
+  type = string
+}
