@@ -15,14 +15,6 @@ variable "sas_token_predictions" {
   type = string
 }
 
-variable "sas_token_sandbox_json" {
-  type = string
-}
-
-variable "sas_token_sandbox_pred" {
-  type = string
-}
-
 variable "snowflake_alias" {
   description = "Alias of the terraform provider"
   type        = string
