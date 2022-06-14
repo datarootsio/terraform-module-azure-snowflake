@@ -7,6 +7,13 @@ terraform {
   }
 }
 
+provider "snowflake" {
+  features {}
+  alias = var.snowflake_alias
+  role  = var.snowflake_role
+}
+
+
 resource "snowflake_database" "main" {
   provider = snowflake.terraform
   name     = "WEATHER_${local.env_upper}"

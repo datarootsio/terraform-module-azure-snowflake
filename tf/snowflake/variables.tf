@@ -26,6 +26,7 @@ variable "sas_token_sandbox_pred" {
 variable "snowflake_alias" {
   description = "Alias of the terraform provider"
   type        = string
+  default     = "terraform"
 }
 
 variable "snowflake_role" {
