@@ -1,9 +1,15 @@
+data "azurerm_client_config" "current" {}
+
+provider "azurerm" {
+  features {}
+}
+
 resource "azurerm_resource_group" "rg" {
-  name     = local.resource_group_name
+  name     = "rootsac2022q1edge-${var.env}"
   location = var.location
 
   tags = {
-    managed-by  = var.managed_tag
+    managed-by  = "Terraform"
     environment = var.env
   }
 }
