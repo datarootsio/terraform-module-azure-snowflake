@@ -1,6 +1,6 @@
 resource "snowflake_file_format" "json" {
   provider             = snowflake.terraform
-  name                 = locals.file_format_name
+  name                 = local.file_format_name
   database             = snowflake_database.main.name
   schema               = snowflake_schema.datawarehouse.name
   format_type          = "JSON"
