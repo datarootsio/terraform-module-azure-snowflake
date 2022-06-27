@@ -11,5 +11,7 @@ resource "azurerm_resource_group" "rg" {
   tags = {
     managed-by  = "Terraform"
     environment = var.env
+    customer    = "dataroots"
+    contact     = "lidia@dataroots.io"
   }
 }
