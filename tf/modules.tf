@@ -10,6 +10,6 @@ module "snowflake" {
   snowflake_alias = var.snowflake_alias
   snowflake_role  = var.snowflake_role
 
-  # sas_token             = module.azure.snowflake_sas_token
-  # sas_token_predictions = module.azure.snowflake_sas_token_predictions
+  sas_token             = module.azure.snowflake_sas_token
+  sas_token_predictions = module.azure.snowflake_sas_token_predictions
 }
