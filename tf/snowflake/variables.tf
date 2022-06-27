@@ -7,13 +7,13 @@ variable "env" {
   }
 }
 
-# variable "sas_token" {
-#   type = string
-# }
+variable "sas_token" {
+  type = string
+}
 
-# variable "sas_token_predictions" {
-#   type = string
-# }
+variable "sas_token_predictions" {
+  type = string
+}
 
 variable "snowflake_alias" {
   description = "Alias of the terraform provider"
