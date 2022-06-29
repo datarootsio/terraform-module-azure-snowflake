@@ -3,12 +3,12 @@
 ![dataroots.png](assets/dataroots.png)
 
 # Terraforming Snowflake 
-Part of [Weather Nowcasting](https://dataroots.ghost.io/weather-nowcasting/) - Weather prediction on an NVIDIA jetson with a CI/CD pipeline on the cloud
-Shows how Terraform can be used to set up our Snowflake resources. On top of that, we present how to load the content of an Azure container into a Snowflake table. 
+Part of [Weather Nowcasting](https://dataroots.ghost.io/weather-nowcasting/) - Weather prediction on an NVIDIA jetson with a CI/CD pipeline on the cloud.
+Shows how Terraform can be used to set up our Snowflake resources. On top of that, we present how to load in near-real-time the content of an Azure container into a Snowflake table. 
 
 ## General
 This is part of the graduation project of the rootsacademy of March 2022. An application to predict weather up to 4 hours in the future based on measurements obtained from a sensor installed on the roof of Dataroots' building. These predictions will be based on real-time measurements of the temperature, humidity, pressure, light, sound and a camera pointed towards the sky. We also wanted to exercise building the CI/CD pipeline and connection between the edge device and the cloud.
-More information can also be found [here](https://dataroots.ghost.io/weather-nowcasting/).
+More information can also be found [here](https://dataroots.io/research/contributions/weather-nowcasting).
 
 ## Cloud architecture
 
@@ -19,20 +19,31 @@ Here's an overview of our cloud architecture:
 - Managing the flow of images from the device into a blob storage container on Azure and from the storage container into the ML workspace
 - Developing a CI/CD pipeline that automates the build and deployment of a model on an edge device
 
+![architecture.png](assets/architecture.png)
+
+
+## Resources 
+
 **Snowflake**
-Each time sensor data gets collected into an Azure blob container, it’ll be stored on Snowflake with the same format. To create such a connection, we’ve provisioned an [Azure Event Grid](https://docs.microsoft.com/en-us/azure/event-grid/overview). So a notification gets sent to Snowflake and a new batch of data gets stored in its appropriate table.
+- Database
+- Warehouse
+- Schema
+- Tables
+  - One for sensor information
+  - One for predictions
+- File format
+- Storage & notification integration
+- Pipes (one for each of the tables)
+- Stages (one for each of the tables)
 
 **Edge & ML resources:**
-- IoT hub, a central message hub for bi-directional communication between an IoT application and devices it manages
-- storage account and a blob container within it to store the images sent from the device
-- storage account and blob container within it to store the sensor data, receiving messages on a batch basis every 5 minutes
-- One of the primary resources for the ML team is a *machine learning workspace*.
-- *Azure Storage account* is used as the default datastore for the workspace. Jupyter notebooks that are used with your Azure Machine Learning compute instances are stored here as well. In our case, we've used the same storage account serving as an endpoint of the IoT Hub for our ML worksapce.
-- Each Azure Machine Learning workspace has an associated Azure *Key-Vault* to manage secrets in the key vault including setting, retrieving, deleting, and listing secrets. 
-- *Application Insights* is an application performance management service in Microsoft Azure that enables the capture, storage, and analysis of telemetry data from applications.
-- Azure container registry is used to register docker containers that are used for machine learning environments when training and deploying models.
+- IoT hub, along with its dependencies, e.g. azure container registry
+- Storage accounts
+  - One for storing the images sent from the IoT device
+  - One for storing the sensor data
+  - One for storing the predictions
+- Machine learning workspace, along with its dependencies, e.g. key vault, application insights
 
-![architecture.png](assets/architecture.png)
 
 ## CI/CD actions
 In this project we validate and plan our Terraform code as part of a Github workflow; more specifically, we execute the following 4 steps: 
@@ -59,9 +70,7 @@ We explain everything in our [blog post](TBD). Briefly, you can do the following
 </ul>
 
 ## Acknowledgements
-Thanks goes to:
-- [Frederik](https://github.com/frederikdesmedt), for his valuable code reviews/feedback
-
+Special thanks go to our supervisors at Dataroots for guiding us throught this project. 
 
 ## Contact
 - [Lidia](https://github.com/LidiaBaciu) lidia@dataroots.io
