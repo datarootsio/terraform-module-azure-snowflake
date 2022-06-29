@@ -23,16 +23,14 @@ Here's an overview of our cloud architecture:
 Each time sensor data gets collected into an Azure blob container, it’ll be stored on Snowflake with the same format. To create such a connection, we’ve provisioned an [Azure Event Grid](https://docs.microsoft.com/en-us/azure/event-grid/overview). So a notification gets sent to Snowflake and a new batch of data gets stored in its appropriate table.
 
 **Edge & ML resources:**
-<ul>
-  <li>IoT hub, a central message hub for bi-directional communication between an IoT application and devices it manages</li>
-  <li>storage account and a blob container within it to store the images sent from the device</li>
-  <li>storage account and blob container within it to store the sensor data, receiving messages on a batch basis every 5 minutes</li>
-  <li>One of the primary resources for the ML team is a *machine learning workspace*.</li>
-  <li>*Azure Storage account* is used as the default datastore for the workspace. Jupyter notebooks that are used with your Azure Machine Learning compute instances are stored here as well. In our case, we've used the same storage account serving as an endpoint of the IoT Hub for our ML worksapce.</li>
-  <li>Each Azure Machine Learning workspace has an associated Azure *Key-Vault* to manage secrets in the key vault including setting, retrieving, deleting, and listing secrets. </li>
-  <li>*Application Insights* is an application performance management service in Microsoft Azure that enables the capture, storage, and analysis of telemetry data from applications.</li>
-  <li>Azure container registry is used to register docker containers that are used for machine learning environments when training and deploying models.</li>
-</ul>
+- IoT hub, a central message hub for bi-directional communication between an IoT application and devices it manages
+- storage account and a blob container within it to store the images sent from the device
+- storage account and blob container within it to store the sensor data, receiving messages on a batch basis every 5 minutes
+- One of the primary resources for the ML team is a *machine learning workspace*.
+- *Azure Storage account* is used as the default datastore for the workspace. Jupyter notebooks that are used with your Azure Machine Learning compute instances are stored here as well. In our case, we've used the same storage account serving as an endpoint of the IoT Hub for our ML worksapce.
+- Each Azure Machine Learning workspace has an associated Azure *Key-Vault* to manage secrets in the key vault including setting, retrieving, deleting, and listing secrets. 
+- *Application Insights* is an application performance management service in Microsoft Azure that enables the capture, storage, and analysis of telemetry data from applications.
+- Azure container registry is used to register docker containers that are used for machine learning environments when training and deploying models.
 
 ![architecture.png](assets/architecture.png)
 
