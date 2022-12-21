@@ -1,4 +1,4 @@
-name: "Deploy prod"
+name: "Destroy prod"
 on:
   push:
     tags:
@@ -28,7 +28,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       - name: Terraform Apply
         id: apply
-        run: terraform apply -var-file vars/prod.tfvars -auto-approve
+        run: terraform apply -destroy -var-file vars/prod.tfvars -auto-approve
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
