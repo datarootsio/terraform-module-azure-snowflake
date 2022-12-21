@@ -1,4 +1,4 @@
-name: "Deploy staging"
+name: "Destroy staging"
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ env:
   tf_version: 'latest'
 jobs:
   apply-staging:
-    name: Terraform Apply Staging
+    name: Terraform Destroy Staging
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -26,12 +26,9 @@ jobs:
           SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
           TF_VAR_sas_token_sensors_sandbox: ${{ secrets.SAS_TOKEN_SENSORS_SANDBOX }}
           TF_VAR_sas_token_predictions_sandbox: ${{ secrets.SAS_TOKEN_PREDICTIONS_SANDBOX }}
-      - name: Terraform Format
-        id: format
-        run: terraform fmt -check -recursive
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply -var-file vars/staging.tfvars -auto-approve
+      - name: Terraform destroy
+        id: destroy
+        run: terraform apply -destroy -var-file vars/staging.tfvars -auto-approve
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
